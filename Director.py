@@ -13,8 +13,9 @@ class director():
     def _handle_input(self):
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    self.run = False
                     quit()
     
     def _draw(self):
-        #  self.screen.blit((0, 0))
+        
         pass

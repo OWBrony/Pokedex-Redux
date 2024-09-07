@@ -23,19 +23,37 @@ class Caller():
         # This will hold the sprite to display
         self.sprite = None
 
-    def check_data(self,name):
+    def _find_special_mon(self,name):
+        """This is to change pokemon names that have special characters
+        into the correct format to search for."""
+        if name == "farfetch'd":
+            return "farfetchd"
+        elif name == "mr. mime" or name == "mr.mime" or name == "mr mime":
+            return "mr-mime"
+        elif name == "nidoran f" or name == "nidoran ♀" or name == "nidoran♀" or name == "nidoran female":
+            return "nidoran-f"
+        elif name == "nidoran m" or name == "nidoran ♂" or name == "nidoran♂" or name == "nidoran male":
+            return "nidoran-m"
+
+    def _add_suffix(self,name,suffix):
+        """This to add regional suffixes to pokemon names."""
+        new_name = name + "-" + suffix
+        return new_name
+
+    def check_data(self,name,suffix_bool = False,suffix_name = ""):
         """This is to change the given Pokemon's name into
         an appropriate format."""
-        if name.lower() == "farfetch'd":
-            return "farfetchd"
-        elif name.lower() == "mr. mime" or name.lower() == "mr.mime" or name.lower() == "mr mime":
-            return "mr-mime"
-        elif name.lower() == "nidoran f" or name.lower() == "nidoran ♀" or name.lower() == "nidoran♀" or name.lower() == "nidoran female":
-            return "nidoran-f"
-        elif name.lower() == "nidoran m" or name.lower() == "nidoran ♂" or name.lower() == "nidoran♂" or name.lower() == "nidoran male":
-            return "nidoran-m"
+        if name.lower() in SPECIAL_MONS:
+            corrected = self._find_special_mon(name.lower())
+            if suffix_bool == True:
+                corrected = self._add_suffix(corrected,suffix_name)
+            return corrected
         else:
-            return name.lower()
+            if suffix_bool == True:
+                final = self._add_suffix(name.lower,suffix_name)
+                return final
+            else:
+                return name.lower()
 
     def get_data(self, name):
         """This is to get the data for the pokemon the user wants.
