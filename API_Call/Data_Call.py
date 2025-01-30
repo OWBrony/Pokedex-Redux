@@ -78,12 +78,16 @@ class Caller():
         self.pokemon_name = name
         # check how many abilities the pokemon has.
         self.first_ability = data["abilities"][0]["ability"]["name"]
-        if data["abilities"][1]["is_hidden"] == False:
-            self.second_ability = data["abilities"][1]["ability"]["name"]
-            self.hidden_ability = data["abilities"][2]["ability"]["name"]
-        elif data["abilities"][1]["is_hidden"] == True:
-            self.hidden_ability = data["abilities"][1]["ability"]["name"]
-            self.second_ability = None
+        try:
+            if data["abilities"][1]["is_hidden"] == False:
+                self.second_ability = data["abilities"][1]["ability"]["name"]
+                self.hidden_ability = data["abilities"][2]["ability"]["name"]
+            if data["abilities"][1]["is_hidden"] == True:
+                self.hidden_ability = data["abilities"][1]["ability"]["name"]
+                self.second_ability = None
+        except:
+            print(IndexError)
+            
         # set the Pokemon stats
         self.sprite = data["sprites"]["front_default"]
         self.health = data["stats"][0]["base_stat"]
