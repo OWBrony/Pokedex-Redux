@@ -75,7 +75,7 @@ class Caller():
     
     def set_info(self, name, data):
         """This is to set all the info for the pokemon"""
-        self.pokemon_name = name
+        self.pokemon_name = name.lower()
         # check how many abilities the pokemon has.
         self.first_ability = data["abilities"][0]["ability"]["name"]
         try:
