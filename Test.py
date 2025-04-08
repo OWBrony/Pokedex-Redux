@@ -21,6 +21,11 @@ def play_test_V1():
         print(f"{test_second.pokemon_name.capitalize()}: Pass")
     except:
         print(f"{test_second.pokemon_name.capitalize()}: Fail")
+    try:
+        assert len(test_second.pokemon_name) == 10
+        print(f"{test_second.pokemon_name.capitalize()} name length: Pass")
+    except:
+        print(IndexError)
     test_third.get_data("Sliggoo")
     try:
         assert test_third.pokemon_name == "sliggoo"
